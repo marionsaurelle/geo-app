@@ -6,8 +6,10 @@ pipeline{
     stages{
         stage('sonar-scan'){
             steps{
-              sh  'mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=marionsaurelle_geo-app'
-            }
+                withSonarQubeEnv('sonarQube'){
+                    sh  'mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=marionsaurelle_geo-app'
+                }
+             
         }
         stage('maven'){
             steps{
